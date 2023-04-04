@@ -4,4 +4,4 @@ matplotlib
 plotly
 streamlit
 python-dotenv
-boto
+boto3
