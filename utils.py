@@ -6,14 +6,12 @@ import plotly.graph_objs as go
 import plotly.offline as pyo
 import pymongo
 import json
-import os
-from dotenv import load_dotenv
+import streamlit as st
 
 # ENV variables
-load_dotenv()
-aws_access_key_id = os.environ.get('aws_access_key_id')
-aws_secret_access_key = os.environ.get('aws_secret_access_key')
-region_name = os.environ.get('region_name')
+aws_access_key_id = st.secrets["aws_access_key_id"]
+aws_secret_access_key = st.secrets["aws_secret_access_key"]
+region_name = st.secrets["region_name"]
 
 
 def read_from_s3(bucket_name, key):
