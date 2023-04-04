@@ -1,39 +1,30 @@
-import pymongo
+import json
+import os
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.express as px
+import pymongo
 import streamlit as st
+from dotenv import load_dotenv
 
-# set up the MongoDB client
-client = pymongo.MongoClient(
-    "mongodb+srv://bda:B1gdata2023@cluster0.igmsvhv.mongodb.net/Tweets?retryWrites=true&w=majority")
+import utils
 
-# access the "my_database" database and the "my_collection" collection
-db = client.Tweets
-collection = db["real-time"]
+# ENV variables
+load_dotenv()
+aws_access_key_id = os.environ.get('aws_access_key_id')
+aws_secret_access_key = os.environ.get('aws_secret_access_key')
+region_name = os.environ.get('region_name')
+MONGO_URL = os.environ.get('mongo_url')
+bucket_name = os.environ.get('bucket_name')
+sentiment_key = os.environ.get('sentiment_key')
+topic_key = os.environ.get('topic_key')
 
-# Read data from MongoDB
-data = []
-for document in collection.find():
-    date = document["_id"]
-    sentiment_data = document["sentiment_data"]
-    for time, sentiment_values in sentiment_data.items():
-        compound = sentiment_values["compound"]
-        count = sentiment_values["count"]
-        total = sentiment_values["total"]
-        data.append((date, time, float(compound), int(count), float(total)))
+batch_sentiment_data = utils.read_from_s3(bucket_name, sentiment_key)
+batch_sentiment_fig = utils.plot_batch_sentiment_fig(batch_sentiment_data)
 
-# Convert data to pandas DataFrame
-df = pd.DataFrame(data, columns=["date", "time", "compound", "count", "total"])
-df.drop(columns=['date'], inplace=True)
-df.rename(columns={'time': 'datetime'}, inplace=True)
-df['datetime'] = pd.to_datetime(df['datetime'])
-df = df.sort_values(by='datetime')
+stream_sentiment_df = utils.read_from_mongo(MONGO_URL)
+stream_sentiment_fig = utils.plot_stream_fig(stream_sentiment_df)
 
-# Plot time series of compound sentiment
-fig = px.line(df, x='datetime', y='compound', title='Compound Sentiment Time Series')
-fig.update_xaxes(title='Datetime')
-fig.update_yaxes(title='Compound Sentiment')
-
-# Display the plot on Streamlit
-st.plotly_chart(fig)
+st.plotly_chart(batch_sentiment_fig)
+st.plotly_chart(stream_sentiment_fig)

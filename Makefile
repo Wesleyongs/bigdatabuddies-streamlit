@@ -28,6 +28,9 @@ clean:
 	@echo "Cleaning up virtual environment..."
 	rm -rf $(VENV_NAME)
 
+run:
+	python3.8 -m streamlit run your_app.py
+
 # Display help information
 help:
 	@echo "Usage: make [target]"
