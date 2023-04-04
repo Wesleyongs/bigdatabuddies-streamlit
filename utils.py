@@ -62,19 +62,19 @@ def read_from_mongo(MONGO_URL):
 def plot_stream_fig(df):
     # Create three trace objects, one for each score type
     trace1 = go.Scatter(x=df['datetime'], y=df['positive'],
-                        mode='lines', name='Positive')
+                        mode='lines', name='Positive', line=dict(color='green'))
     trace2 = go.Scatter(x=df['datetime'], y=df['negative'],
-                        mode='lines', name='Negative')
+                        mode='lines', name='Negative', line=dict(color='red'))
     trace3 = go.Scatter(x=df['datetime'], y=df['neutral'],
-                        mode='lines', name='Neutral')
+                        mode='lines', name='Neutral', line=dict(color='blue'))
 
     # Create a data list containing the three trace objects
     data = [trace1, trace2, trace3]
 
     # Define the layout for the plot
-    layout = go.Layout(title='Sentiment Scores Over Time',
-                       xaxis=dict(title='Date'),
-                       yaxis=dict(title='Score'))
+    layout = go.Layout(
+        xaxis=dict(title='Date'),
+        yaxis=dict(title='Score'))
 
     # Create a Figure object containing the data and layout, and plot it
     return go.Figure(data=data, layout=layout)
@@ -88,24 +88,26 @@ def plot_batch_sentiment_fig(data):
     neu_scores = [d['neu'] if d['neu'] is not None else 0 for d in data]
 
     # Create a trace object for the positive scores
-    trace1 = go.Bar(x=dates, y=pos_scores, name='Positive')
+    trace1 = go.Bar(x=dates, y=pos_scores, name='Positive',
+                    marker=dict(color='green'))
 
     # Create a trace object for the negative scores, with a base of pos_scores
-    trace2 = go.Bar(x=dates, y=neg_scores, name='Negative', base=pos_scores)
+    trace2 = go.Bar(x=dates, y=neg_scores, name='Negative',
+                    marker=dict(color='red'))
 
     # Create a trace object for the neutral scores, with a base of the sum of pos_scores and neg_scores
-    trace3 = go.Bar(x=dates, y=neu_scores, name='Neutral', base=[
-                    sum(x) for x in zip(pos_scores, neg_scores)])
+    trace3 = go.Bar(x=dates, y=neu_scores, name='Neutral',
+                    marker=dict(color='blue'))
 
     # Create a data list containing the three trace objects
     data = [trace1, trace2, trace3]
 
     # Define the layout for the plot
-    layout = go.Layout(title='Sentiment Scores Over Time',
-                       xaxis=dict(title='Date'),
-                       yaxis=dict(title='Score', type='linear',
-                                  range=[0, 1], dtick=0.1),
-                       barmode='stack')
+    layout = go.Layout(
+        xaxis=dict(title='Date'),
+        yaxis=dict(title='Score', type='linear',
+                   range=[0, 1], dtick=0.1),
+        barmode='stack')
 
     # Create a Figure object containing the data and layout, and plot it
 

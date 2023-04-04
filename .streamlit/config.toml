@@ -1,0 +1,3 @@
+[general]
+# Set the Streamlit app to run in wide mode by default
+wideMode = true
