@@ -6,12 +6,21 @@ import plotly.graph_objs as go
 import plotly.offline as pyo
 import pymongo
 import json
+import os
+from dotenv import load_dotenv
+
+# ENV variables
+load_dotenv()
+aws_access_key_id = os.environ.get('aws_access_key_id')
+aws_secret_access_key = os.environ.get('aws_secret_access_key')
+region_name = os.environ.get('region_name')
+
 
 def read_from_s3(bucket_name, key):
     session = boto3.Session(
-        aws_access_key_id='AKIARJIOGROB7MVFOYGX',
-        aws_secret_access_key='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',
-        region_name='us-east-1'
+        aws_access_key_id=aws_access_key_id,
+        aws_secret_access_key=aws_secret_access_key,
+        region_name=region_name
     )
 
     s3 = session.resource('s3')
@@ -101,7 +110,7 @@ def plot_batch_sentiment_fig(data):
                        barmode='stack')
 
     # Create a Figure object containing the data and layout, and plot it
-    
+
     fig = go.Figure(data=data, layout=layout)
     # fig.show()
     return fig
