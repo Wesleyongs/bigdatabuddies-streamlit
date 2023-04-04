@@ -9,9 +9,9 @@ import json
 import streamlit as st
 
 # ENV variables
-aws_access_key_id = st.secrets["aws_access_key_id"]
-aws_secret_access_key = st.secrets["aws_secret_access_key"]
-region_name = st.secrets["region_name"]
+aws_access_key_id = st.secrets.secrets["aws_access_key_id"]
+aws_secret_access_key = st.secrets.secrets["aws_secret_access_key"]
+region_name = st.secrets.secrets["region_name"]
 
 
 def read_from_s3(bucket_name, key):
