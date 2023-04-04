@@ -24,11 +24,6 @@ def read_from_s3(bucket_name, key):
     s3 = session.resource('s3')
 
     obj = s3.Object(bucket_name, key)
-    print(aws_access_key_id)
-    print(aws_secret_access_key)
-    print(region_name)
-    print(bucket_name)
-    print(aws_secret_access_key)
     json_data = obj.get()['Body'].read().decode('utf-8')
     return json.loads(json_data)
 
