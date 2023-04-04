@@ -1,3 +1,8 @@
+import base64
+from io import BytesIO
+import json
+import os
+
 import boto3
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -5,8 +10,8 @@ import plotly.express as px
 import plotly.graph_objs as go
 import plotly.offline as pyo
 import pymongo
-import json
 import streamlit as st
+from PIL import Image
 
 # ENV variables
 aws_access_key_id = st.secrets.secrets["aws_access_key_id"]
@@ -114,3 +119,55 @@ def plot_batch_sentiment_fig(data):
     fig = go.Figure(data=data, layout=layout)
     # fig.show()
     return fig
+
+
+def show_profile_pictures():
+
+    # Set the path to your image folder
+    IMAGE_FOLDER = 'images/'
+
+    # Get a list of all the image filenames in the folder
+    image_filenames = os.listdir(IMAGE_FOLDER)
+
+    # Set the number of columns you want to display
+    NUM_COLUMNS = 6
+
+    # Calculate the number of rows needed to display all the images
+    num_images = len(image_filenames)
+    num_rows = num_images // NUM_COLUMNS
+    if num_images % NUM_COLUMNS != 0:
+        num_rows += 1
+
+    # Create a Streamlit grid to display the images
+    for i in range(num_rows):
+        # Create a new row
+        row = st.columns(NUM_COLUMNS)
+
+        for j in range(NUM_COLUMNS):
+            # Calculate the index of the current image in the list
+            index = i * NUM_COLUMNS + j
+
+            # Check if there are still images left to display
+            if index < num_images:
+                # Load the image from file
+                image_path = os.path.join(IMAGE_FOLDER, image_filenames[index])
+                image = Image.open(image_path)
+
+                # Resize the image to the specified width and height
+                image = image.resize((150, 150))
+
+                # Display the image in the current column, with a round border
+                with row[j]:
+                    st.markdown(
+                        f'<img src="data:image/png;base64,{image_to_base64(image)}" style="border-radius: 50%; overflow: hidden;" /><br>', unsafe_allow_html=True)
+                    # st.caption(
+                    #     f'<div style="text-align: left;">{image_filenames[index]}</div>', unsafe_allow_html=True)
+
+
+# Function to convert image to base64 string
+
+
+def image_to_base64(image):
+    with BytesIO() as buffer:
+        image.save(buffer, 'png')
+        return base64.b64encode(buffer.getvalue()).decode()
