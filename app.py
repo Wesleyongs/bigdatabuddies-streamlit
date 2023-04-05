@@ -67,6 +67,7 @@ st.write("[Social Media Sentiment Analysis in Python with VADER: No Training Req
 st.plotly_chart(batch_sentiment_fig, responsive=True,
                 use_container_width=True, height='100vh')
 st.header("Real time sentiment analysis")
+st.write("Straight lines are for when the streaming service is not running (to save monies)")
 st.plotly_chart(stream_sentiment_fig, responsive=True,
                 use_container_width=True, height='100vh')
 

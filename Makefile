@@ -29,7 +29,7 @@ clean:
 	rm -rf $(VENV_NAME)
 
 run:
-	python3.8 -m streamlit run your_app.py
+	python3.8 -m streamlit run your app.py
 
 # Display help information
 help:
