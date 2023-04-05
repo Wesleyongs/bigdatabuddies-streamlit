@@ -130,7 +130,7 @@ def show_profile_pictures():
     image_filenames = os.listdir(IMAGE_FOLDER)
 
     # Set the number of columns you want to display
-    NUM_COLUMNS = 6
+    NUM_COLUMNS = 7
 
     # Calculate the number of rows needed to display all the images
     num_images = len(image_filenames)
@@ -159,7 +159,7 @@ def show_profile_pictures():
                 # Display the image in the current column, with a round border
                 with row[j]:
                     st.markdown(
-                        f'<img src="data:image/png;base64,{image_to_base64(image)}" style="border-radius: 50%; overflow: hidden;" /><br>', unsafe_allow_html=True)
+                        f'<figure><img src="data:image/png;base64,{image_to_base64(image)}" style="border-radius: 50%; overflow: hidden;" /><figcaption>{image_filenames[index][:-4]}</figcaption></figure><br>', unsafe_allow_html=True)
                     # st.caption(
                     #     f'<div style="text-align: left;">{image_filenames[index]}</div>', unsafe_allow_html=True)
 
