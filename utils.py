@@ -110,7 +110,7 @@ def plot_batch_sentiment_fig(data):
     # Define the layout for the plot
     layout = go.Layout(
         xaxis=dict(title='Date'),
-        yaxis=dict(title='Score', type='linear',
+        yaxis=dict(title='Compound Score', type='linear',
                    range=[0, 1], dtick=0.1),
         barmode='stack')
 

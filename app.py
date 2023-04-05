@@ -57,8 +57,13 @@ batch_sentiment_fig = utils.plot_batch_sentiment_fig(batch_sentiment_data)
 
 stream_sentiment_df = utils.read_from_mongo(MONGO_URL)
 stream_sentiment_fig = utils.plot_stream_fig(stream_sentiment_df)
-
+    
 st.header("Sentiment distribution over time")
+st.write("### What is Compound Score?")
+st.write("In sentiment analysis, the compound score is a metric that summarizes the overall sentiment of a piece of text, such as a tweet or a product review. The score ranges from -1 (most extreme negative sentiment) to 1 (most extreme positive sentiment), with 0 representing neutral sentiment.")
+st.write("The compound score corresponds to the sum of all the valence scores normalized between -1 and 1, where the valence score is a measure of the positivity or negativity of a word.")
+st.write("To learn more about compound score and how it's calculated, check out this article on social media sentiment analysis with VADER:")
+st.write("[Social Media Sentiment Analysis in Python with VADER: No Training Required](https://towardsdatascience.com/social-media-sentiment-analysis-in-python-with-vader-no-training-required-4bc6a21e87b8)")
 st.plotly_chart(batch_sentiment_fig, responsive=True,
                 use_container_width=True, height='100vh')
 st.header("Real time sentiment analysis")
