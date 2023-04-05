@@ -165,8 +165,6 @@ def show_profile_pictures():
 
 
 # Function to convert image to base64 string
-
-
 def image_to_base64(image):
     with BytesIO() as buffer:
         image.save(buffer, 'png')
