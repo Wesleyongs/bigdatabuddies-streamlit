@@ -79,7 +79,7 @@ def plot_stream_fig(df):
     # Define the layout for the plot
     layout = go.Layout(
         xaxis=dict(title='Date'),
-        yaxis=dict(title='Score'))
+        yaxis=dict(title='Count'))
 
     # Create a Figure object containing the data and layout, and plot it
     return go.Figure(data=data, layout=layout)
