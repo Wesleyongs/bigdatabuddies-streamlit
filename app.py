@@ -91,3 +91,28 @@ for i, (sentiment, values) in enumerate(batch_topic_data.items()):
     col.subheader(f":{sentiment_colors[sentiment]}[{sentiment.upper()}]")
     for key, words in values.items():
         col.write(f'Topic {key}: {", ".join(words)}')
+
+# Read the JSON data from file
+st.header("Frequently occuring keywords across the months")
+with open('monthly_topic.json', 'r') as f:
+    json_data = json.load(f)
+
+col1, col2, col3, col4, col5, col6 = st.columns(6)
+col1.subheader("November")
+for key, words in json_data["November"].items():
+        col1.write(f'Topic {key}: {", ".join(words)}')
+col2.subheader("December")
+for key, words in json_data["December"].items():
+        col2.write(f'Topic {key}: {", ".join(words)}')
+col3.subheader("January")
+for key, words in json_data["January"].items():
+        col3.write(f'Topic {key}: {", ".join(words)}')
+col4.subheader("Febuary")
+for key, words in json_data["Febuary"].items():
+        col4.write(f'Topic {key}: {", ".join(words)}')
+col5.subheader("March")
+for key, words in json_data["March"].items():
+        col5.write(f'Topic {key}: {", ".join(words)}')
+col6.subheader("April")
+for key, words in json_data["April"].items():
+        col6.write(f'Topic {key}: {", ".join(words)}')

@@ -1,0 +1,26 @@
+{
+    "December": {
+        "Topic 0": ["ai", "google", "use", "good", "people", "make", "asked", "write", "new", "work"],
+        "Topic 1": ["like", "openai", "gpt", "chat", "code", "time", "prompt", "way", "dan", "que"]
+    },
+    "January": {
+        "Topic 0": ["ai", "like", "make", "people", "google", "use", "using", "know", "write", "way"],
+        "Topic 1": ["gpt", "chat", "openai", "prompt", "work", "used", "use", "code", "want", "time"]
+    },
+    "November": {
+        "Topic 0": ["team", "request", "customer", "like", "reach", "data", "support", "message", "response", "need"],
+        "Topic 1": ["dm", "help", "contact", "number", "assist", "thanks", "kindly", "thank", "today", "know"]
+    },
+    "Febuary": {
+        "Topic 0": ["ai", "query", "dan", "people", "time", "like", "prompt", "make", "way", "want"],
+        "Topic 1": ["chatgpt", "like", "use", "queries", "bing", "think", "using", "good", "chat", "people"]
+    },
+    "March": {
+        "Topic 0": ["ai", "chatgpt", "like", "people", "make", "prompt", "think", "use", "new", "model"],
+        "Topic 1": ["like", "gpt", "query", "know", "time", "people", "use", "chat", "good", "using"]
+    },
+    "April": {
+        "Topic 0": ["marketcap", "arb", "arbitrum", "reimagining", "low", "launched", "hey", "yield", "potential", "dex"],
+        "Topic 1": ["hand", "big", "say", "school", "xoomcjbxvq", "new", "question", "old", "run", "read"]
+    }
+}
